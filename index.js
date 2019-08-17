@@ -40,6 +40,15 @@ function rfdc (opts) {
         o2[k] = clone(cur)
       }
     }
+    var symbols = Object.getOwnPropertySymbols(o)
+    if (symbols.length) {
+      for (var j = 0; j < symbols.length; j++) {
+        var s = symbols[j]
+        if (o.propertyIsEnumerable(s)) {
+          o2[s] = clone(o[s])
+        }
+      }
+    }
     return o2
   }
 
@@ -56,6 +65,15 @@ function rfdc (opts) {
         o2[k] = new Date(cur)
       } else {
         o2[k] = cloneProto(cur)
+      }
+    }
+    var symbols = Object.getOwnPropertySymbols(o)
+    if (symbols.length) {
+      for (var j = 0; j < symbols.length; j++) {
+        var s = symbols[j]
+        if (o.propertyIsEnumerable(s)) {
+          o2[s] = clone(o[s])
+        }
       }
     }
     return o2
@@ -113,6 +131,15 @@ function rfdcCircles (opts) {
         }
       }
     }
+    var symbols = Object.getOwnPropertySymbols(o)
+    if (symbols.length) {
+      for (var j = 0; j < symbols.length; j++) {
+        var s = symbols[j]
+        if (o.propertyIsEnumerable(s)) {
+          o2[s] = clone(o[s])
+        }
+      }
+    }
     refs.pop()
     refsNew.pop()
     return o2
@@ -137,6 +164,15 @@ function rfdcCircles (opts) {
           o2[k] = refsNew[i]
         } else {
           o2[k] = cloneProto(cur)
+        }
+      }
+    }
+    var symbols = Object.getOwnPropertySymbols(o)
+    if (symbols.length) {
+      for (var j = 0; j < symbols.length; j++) {
+        var s = symbols[j]
+        if (o.propertyIsEnumerable(s)) {
+          o2[s] = clone(o[s])
         }
       }
     }

@@ -171,4 +171,17 @@ function types (clone, label) {
     }
     fn(1, 2, 3)
   })
+  test(label + ' – symbol', async ({is}) => {
+    const s = Symbol('a')
+    is(clone(s), s, 'same symbol')
+  })
+  test(label + ' – object with symbol property', async ({is, isNot}) => {
+    const a = Symbol('a')
+    const o = {[a]: 'a', b: 'b'}
+
+    const cloned = clone(o)
+    isNot(cloned, o, 'different object')
+    is(cloned[a], o[a], 'same value a')
+    is(cloned.b, o.b, 'same value b')
+  })
 }
